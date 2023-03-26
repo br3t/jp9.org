@@ -3,13 +3,16 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "npx astro-i18next generate && astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "npx astro-i18next generate && astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^2.1.7"
+    "@astrojs/tailwind": "^3.1.1",
+    "astro": "^2.1.7",
+    "astro-i18next": "^1.0.0-beta.21",
+    "tailwindcss": "^3.2.7"
   }
 }
