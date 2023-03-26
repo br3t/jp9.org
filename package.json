@@ -6,11 +6,12 @@
     "start": "node ./server/bin/www",
     "server": "nodemon run start",
     "server:install": "npm install --prefix server",
+    "server:seed": "npm run seed --prefix server",
     "client": "npm run start --prefix client",
     "client:install": "npm install --prefix client",
     "client:build": "npm run build --prefix client",
     "setup": "npm install && concurrently \"npm run client:install\" \"npm run server:install\"",
-    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run client\" \"npm run server:seed\" \"npm run server\""
   },
   "author": "",
   "license": "ISC",
