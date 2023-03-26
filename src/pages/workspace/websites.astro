@@ -1,0 +1,13 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "../../layouts/WorkspaceLayout.astro";
+import Websites from "../../components/Workspace/Websites";
+
+changeLanguage("en");
+---
+
+<Layout>
+  <!-- Page Content -->
+  <Websites client:only="react" />
+  <!-- END Page Content -->
+</Layout>
