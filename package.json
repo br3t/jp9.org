@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node ./server/bin/www",
+    "start": "npm run start --prefix server",
     "server": "nodemon run start",
     "server:install": "npm install --prefix server",
     "server:seed": "npm run seed --prefix server",
