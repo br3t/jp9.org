@@ -1,8 +1,16 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 
 export default function React() {
-  const [counter, setCounter] = useState(0);
-  const name = 'Websites';
+  const [websites, setWebsites] = useState([]);
+  const getWebsites = async () => {
+    let res = await fetch("/api/websites");
+    let resJson = await res.json();
+    setWebsites(resJson);
+  };
+
+  useEffect(() => {
+    getWebsites();
+  }, []);
 
   return (
     
@@ -47,9 +55,6 @@ export default function React() {
           {/* Table Header */}
           <thead>
             <tr className="border-b border-gray-200">
-              <th className="p-3 text-gray-700 bg-gray-100 font-semibold text-sm tracking-wider uppercase text-center">
-                Avatar
-              </th>
               <th className="p-3 text-gray-700 bg-gray-100 font-semibold text-sm tracking-wider uppercase text-left">
                 Name
               </th>
@@ -68,16 +73,11 @@ export default function React() {
 
           {/* Table Body */}
           <tbody>
-            <tr className="border-b border-gray-200">
-              <td className="p-3 text-center">
-                <img src="https://cdn.tailkit.com/media/placeholders/avatar-mEZ3PoFGs_k-160x160.jpg" alt="User Avatar" className="inline-block w-10 h-10 rounded-full" />
-              </td>
+          {websites.map(el => {
+            return (<tr key={el.id} className="border-b border-gray-200">
               <td className="p-3">
                 <p className="font-medium">
-                  Nansi Hart
-                </p>
-                <p className="text-gray-500">
-                  Web Designer
+                  {el.domain_name}
                 </p>
               </td>
               <td className="p-3 text-gray-500">
@@ -92,107 +92,10 @@ export default function React() {
                   <span>Edit</span>
                 </button>
               </td>
-            </tr>
-            <tr className="border-b border-gray-200">
-              <td className="p-3 text-center">
-                <img src="https://cdn.tailkit.com/media/placeholders/avatar-BGz8vO3pK8k-160x160.jpg" alt="User Avatar" className="inline-block w-10 h-10 rounded-full" />
-              </td>
-              <td className="p-3">
-                <p className="font-medium">
-                  Lia Baker
-                </p>
-                <p className="text-gray-500">
-                  Web Developer
-                </p>
-              </td>
-              <td className="p-3 text-gray-500">
-                l.baker@example.com
-              </td>
-              <td className="p-3 text-center">
-                <div className="font-semibold inline-flex px-2 py-1 leading-4 text-xs rounded-full text-blue-700 bg-blue-200">Freelancer</div>
-              </td>
-              <td className="p-3 text-center">
-                <button type="button" className="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-2 py-1 leading-5 text-sm rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
-                  <svg className="hi-solid hi-pencil inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>
-                  <span>Edit</span>
-                </button>
-              </td>
-            </tr>
-            <tr className="border-b border-gray-200">
-              <td className="p-3 text-center">
-                <img src="https://cdn.tailkit.com/media/placeholders/avatar-iFgRcqHznqg-160x160.jpg" alt="User Avatar" className="inline-block w-10 h-10 rounded-full" />
-              </td>
-              <td className="p-3">
-                <p className="font-medium">
-                  Xavier Rosales
-                </p>
-                <p className="text-gray-500">
-                  Author
-                </p>
-              </td>
-              <td className="p-3 text-gray-500">
-                x.rosales@example.com
-              </td>
-              <td className="p-3 text-center">
-                <div className="font-semibold inline-flex px-2 py-1 leading-4 text-xs rounded-full text-orange-700 bg-orange-200">Trial</div>
-              </td>
-              <td className="p-3 text-center">
-                <button type="button" className="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-2 py-1 leading-5 text-sm rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
-                  <svg className="hi-solid hi-pencil inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>
-                  <span>Edit</span>
-                </button>
-              </td>
-            </tr>
-            <tr className="border-b border-gray-200">
-              <td className="p-3 text-center">
-                <img src="https://cdn.tailkit.com/media/placeholders/avatar-c_GmwfHBDzk-160x160.jpg" alt="User Avatar" className="inline-block w-10 h-10 rounded-full" />
-              </td>
-              <td className="p-3">
-                <p className="font-medium">
-                  Danyal Clark
-                </p>
-                <p className="text-gray-500">
-                  Laravel Developer
-                </p>
-              </td>
-              <td className="p-3 text-gray-500">
-                d.clark@example.com
-              </td>
-              <td className="p-3 text-center">
-                <div className="font-semibold inline-flex px-2 py-1 leading-4 text-xs rounded-full text-emerald-700 bg-emerald-200">Agency</div>
-              </td>
-              <td className="p-3 text-center">
-                <button type="button" className="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-2 py-1 leading-5 text-sm rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
-                  <svg className="hi-solid hi-pencil inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>
-                  <span>Edit</span>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td className="p-3 text-center">
-                <img src="https://cdn.tailkit.com/media/placeholders/avatar-QXevDflbl8A-160x160.jpg" alt="User Avatar" className="inline-block w-10 h-10 rounded-full" />
-              </td>
-              <td className="p-3">
-                <p className="font-medium">
-                  Keira Simons
-                </p>
-                <p className="text-gray-500">
-                  Marketing Director
-                </p>
-              </td>
-              <td className="p-3 text-gray-500">
-                k.simons@example.com
-              </td>
-              <td className="p-3 text-center">
-                <div className="font-semibold inline-flex px-2 py-1 leading-4 text-xs rounded-full text-blue-700 bg-blue-200">Freelancer</div>
-              </td>
-              <td className="p-3 text-center">
-                <button type="button" className="inline-flex justify-center items-center space-x-2 border font-semibold focus:outline-none px-2 py-1 leading-5 text-sm rounded border-gray-300 bg-white text-gray-800 shadow-sm hover:text-gray-800 hover:bg-gray-100 hover:border-gray-300 hover:shadow focus:ring focus:ring-gray-500 focus:ring-opacity-25 active:bg-white active:border-white active:shadow-none">
-                  <svg className="hi-solid hi-pencil inline-block w-4 h-4" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" /></svg>
-                  <span>Edit</span>
-                </button>
-              </td>
-            </tr>
+            </tr>);
+          })}
+
+
           </tbody>
           {/* END Table Body */}
         </table>
