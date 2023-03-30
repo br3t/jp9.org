@@ -1,4 +1,43 @@
+import { useState } from "react";
+
 export default function React() {
+  const [language, setLanguage] = useState("en");
+  const [domainName, setDomainName] = useState("example.com");
+  const [title, setTitle] = useState(domainName + " Website");
+  const [description, setDescription] = useState(
+    domainName + " Website Description"
+  );
+  const [htmlContent, setHtmlContent] = useState(`<h1>This is a Heading</h1>
+<p>This is a paragraph.</p>`);
+
+  const htmlTemplate = `<!DOCTYPE html>
+<html lang="${language}">
+<head>
+<title>${title}</title>
+${
+  description === domainName + " Website Description" || description === ""
+    ? ""
+    : '<meta name="description" content="' + description + '" />'
+}
+<link rel="canonical" href="https://${domainName}/" />
+</head>
+<body>
+${htmlContent}
+</body>
+</html>`;
+
+  const createHtmlPage = (html) => {
+    // const fileData = JSON.stringify(html);
+    const blob = new Blob([html], { type: "text/plain" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    // link.download = "index.html";
+
+    link.href = url;
+    link.target = "_blank";
+    link.click();
+  };
+
   return (
     <>
       {/* Page Container */}
@@ -36,7 +75,12 @@ export default function React() {
               <div className="relative">
                 <div className="pattern-dots-md text-gray-300 absolute top-0 right-0 left-0 h-64 transform translate-x-16 translate-y-32" />
                 <div className="pattern-dots-md text-gray-300 absolute bottom-0 right-0 left-0 h-64 transform -translate-x-16 -translate-y-32" />
-                <form>
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    createHtmlPage(htmlTemplate);
+                  }}
+                >
                   <div className="flex flex-col rounded shadow-sm bg-white overflow-hidden relative">
                     <div className="py-4 px-5 lg:px-6 w-full text-center bg-gray-50">
                       <strong>Configuration:</strong> Website information
@@ -50,9 +94,12 @@ export default function React() {
                           <input
                             className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                             type="text"
-                            id="name"
-                            name="name"
+                            id="website_language"
+                            name="website_language"
                             placeholder="en"
+                            onChange={(e) => {
+                              setLanguage(e.target.value);
+                            }}
                           />
                           <p className="text-sm text-gray-500 underline underline-offset-1">
                             <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
@@ -67,8 +114,9 @@ export default function React() {
                           <input
                             className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                             type="text"
-                            id="host"
-                            name="host"
+                            id="domain_name"
+                            name="domain_name"
+                            onChange={(e) => setDomainName(e.target.value)}
                             placeholder="example.com"
                           />
                         </div>
@@ -86,9 +134,10 @@ export default function React() {
                           <input
                             className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                             type="text"
-                            id="name"
-                            name="name"
+                            id="seo_title"
+                            name="seo_title"
                             placeholder="SEO title"
+                            onChange={(e) => setTitle(e.target.value)}
                           />
                         </div>
                         <div className="space-y-1">
@@ -98,9 +147,10 @@ export default function React() {
                           <input
                             className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                             type="text"
-                            id="host"
-                            name="host"
+                            id="seo_description"
+                            name="seo_description"
                             placeholder="SEO description"
+                            onChange={(e) => setDescription(e.target.value)}
                           />
                         </div>
                         <div className="space-y-1">
@@ -110,9 +160,10 @@ export default function React() {
                           <input
                             className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                             type="text"
-                            id="table_prefix"
-                            name="table_prefix"
+                            id="html_content"
+                            name="html_content"
                             placeholder="HTML content (seo text)"
+                            onChange={(e) => setHtmlContent(e.target.value)}
                           />
                         </div>
                       </div>
