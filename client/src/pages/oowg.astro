@@ -1,0 +1,13 @@
+---
+import { changeLanguage } from "i18next";
+import Layout from "../layouts/WorkspaceLayout.astro";
+import Oowg from "../components/Workspace/Oowg";
+
+changeLanguage("en");
+---
+
+<Layout>
+  <!-- Page Content -->
+  <Oowg client:only="react" />
+  <!-- END Page Content -->
+</Layout>
