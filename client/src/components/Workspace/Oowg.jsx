@@ -26,7 +26,7 @@ export default function React() {
                       clipRule="evenodd"
                     />
                   </svg>
-                  <h1>OOWG</h1>
+                  <span>OOWG</span>
                 </h1>
                 <p className="text-gray-500">One offer website generator</p>
               </div>
@@ -54,7 +54,7 @@ export default function React() {
                             name="name"
                             placeholder="en"
                           />
-                          <p class="text-sm text-gray-500 underline underline-offset-1">
+                          <p className="text-sm text-gray-500 underline underline-offset-1">
                             <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
                               ISO 3166-1 alpha-2
                             </a>
