@@ -88,7 +88,7 @@ export default function React() {
                             type="text"
                             id="name"
                             name="name"
-                            placeholder="What's the name of your database?"
+                            placeholder="SEO title"
                           />
                         </div>
                         <div className="space-y-1">
@@ -100,7 +100,7 @@ export default function React() {
                             type="text"
                             id="host"
                             name="host"
-                            placeholder="Leave empty for 'localhost'"
+                            placeholder="SEO description"
                           />
                         </div>
                         <div className="space-y-1">
@@ -112,7 +112,7 @@ export default function React() {
                             type="text"
                             id="table_prefix"
                             name="table_prefix"
-                            placeholder="Leave empty for 'app_'"
+                            placeholder="HTML content (seo text)"
                           />
                         </div>
                       </div>
