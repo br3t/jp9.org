@@ -71,15 +71,6 @@ const generateHtmlTemplate = ({
     <!-- custom <b> in sentences with keyword -->
     <!-- pluses and minuses -->
 
-
-
-    <!-- content images with alt -->
-
-    <img src="/assets/images/content/1.png" alt="/assets/images/content/1.png"/>
-    <img src="/assets/images/content/2.png" alt="/assets/images/content/2.png"/>
-    <img src="/assets/images/content/3.png" alt="/assets/images/content/3.png"/>
-    <img src="/assets/images/content/4.png" alt="/assets/images/content/4.png"/>
-    <img src="/assets/images/content/5.png" alt="/assets/images/content/5.png"/>
 </article>
 
 <footer>

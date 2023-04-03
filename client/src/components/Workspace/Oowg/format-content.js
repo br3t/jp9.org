@@ -233,6 +233,21 @@ updated.appendChild(updatedWord);
 updated.append(": ");
 updated.appendChild(updatedDate);
 
+////
+// <img src="/assets/images/content/1.png" alt="/assets/images/content/1.png"/>
+// <img src="/assets/images/content/2.png" alt="/assets/images/content/2.png"/>
+// <img src="/assets/images/content/3.png" alt="/assets/images/content/3.png"/>
+// <img src="/assets/images/content/4.png" alt="/assets/images/content/4.png"/>
+// <img src="/assets/images/content/5.png" alt="/assets/images/content/5.png"/>
+
+const createImage = (src) => {
+  const image = document.createElement("img");
+  image.setAttribute("src", src);
+  image.setAttribute("alt", src);
+
+  return image;
+};
+
 const formatContent = (htmlContent) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
@@ -290,6 +305,35 @@ const formatContent = (htmlContent) => {
   addQA();
   addQA();
   addQA();
+
+  // arrange images throughout the text
+  const insertImages = (...images) => {
+    const imagesLength = images.length;
+
+    const pictureEveryNParagraphs = Math.floor(
+      (documentLength - 2) / imagesLength
+    );
+
+    const imagesStack = [...images].reverse();
+
+    for (let i = 2; i <= documentLength - 2; i += 1) {
+      if (i % pictureEveryNParagraphs === 0) {
+        const image = imagesStack.pop();
+
+        if (image) {
+          document.getElementsByTagName("p")[i].after(createImage(image));
+        }
+      }
+    }
+  };
+
+  insertImages(
+    "/assets/images/content/1.png",
+    "/assets/images/content/2.png",
+    "/assets/images/content/3.png",
+    "/assets/images/content/4.png",
+    "/assets/images/content/5.png"
+  );
 
   // console.log(document.body.innerHTML);
   // return htmlContent
