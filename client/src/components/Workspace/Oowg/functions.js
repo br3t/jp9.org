@@ -67,7 +67,7 @@ const generateHtmlTemplate = ({
 <article>
     <!-- content with anchor id headings -->
   
-    ${formatContent(htmlContent)}
+    ${formatContent(htmlContent, isDemo)}
 
     <!-- custom article ul, ol, tables -->
     <!-- custom <b> in sentences with keyword -->

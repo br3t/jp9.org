@@ -1,43 +1,52 @@
-//// banner
-// <img src="/assets/images/banner.jpg" style="border-radius: 10px" alt="/assets/images/banner.jpg"/>
-const banner = document.createElement("img");
-banner.setAttribute("src", "/assets/images/banner.jpg");
-banner.setAttribute("alt", "/assets/images/banner.jpg");
-banner.setAttribute(
-  "style",
-  'border-radius: 10px" alt="/assets/images/banner.jpg'
-);
+const formatContent = (htmlContent, isDemo) => {
+  const parser = new DOMParser();
+  const document = parser.parseFromString(htmlContent, "text/html");
 
-//// button
-// <button type="button" id="copy-button" class="blob">🔥🔥 Play 🔥🔥</button>
-const button = document.createElement("button");
-button.setAttribute("type", "button");
-button.setAttribute("id", "copy-button");
-button.setAttribute("class", "blob");
-button.innerHTML = "🔥🔥 Play 🔥🔥";
+  //// banner
+  // <img src="/assets/images/banner.jpg" style="border-radius: 10px" alt="/assets/images/banner.jpg"/>
+  const banner = document.createElement("img");
+  banner.setAttribute(
+    "src",
+    isDemo
+      ? window.location.origin + "/oowg/assets/images/banner.jpg"
+      : "/assets/images/banner.jpg"
+  );
+  banner.setAttribute("alt", "/assets/images/banner.jpg");
+  banner.setAttribute(
+    "style",
+    'border-radius: 10px" alt="/assets/images/banner.jpg'
+  );
 
-//// table of contents
-// <ol>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#bons-casino">💯 一般情報</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#login">🌐 ログイン</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#registration">🔥 登録</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#freespins">🎲 フリースピン</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#promocode">⚽ ボーナス</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#software">🏆 ソフトウェア</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#live">🎰 ライブ</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#products">💲 ブランド</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#mobile">💻 モバイル版</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#signup">📱 サインアップ</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#vip">💳 VIP</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#service">💬 サポート</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#tournament">💼 トーナメント</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#reviews">🔰 レビュー</a></li>
-//   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#faq">❓ よくある質問</a></li>
-// </ol>
-const tableOfContents = document.createElement("ol");
+  //// button
+  // <button type="button" id="copy-button" class="blob">🔥🔥 Play 🔥🔥</button>
+  const button = document.createElement("button");
+  button.setAttribute("type", "button");
+  button.setAttribute("id", "copy-button");
+  button.setAttribute("class", "blob");
+  button.innerHTML = "🔥🔥 Play 🔥🔥";
 
-//// table
-const table = `<table>
+  //// table of contents
+  // <ol>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#bons-casino">💯 一般情報</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#login">🌐 ログイン</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#registration">🔥 登録</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#freespins">🎲 フリースピン</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#promocode">⚽ ボーナス</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#software">🏆 ソフトウェア</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#live">🎰 ライブ</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#products">💲 ブランド</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#mobile">💻 モバイル版</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#signup">📱 サインアップ</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#vip">💳 VIP</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#service">💬 サポート</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#tournament">💼 トーナメント</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#reviews">🔰 レビュー</a></li>
+  //   <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#faq">❓ よくある質問</a></li>
+  // </ol>
+  const tableOfContents = document.createElement("ol");
+
+  //// table
+  const table = `<table>
   <tbody>
   <tr>
     <td>
@@ -185,80 +194,76 @@ const table = `<table>
   </tr>
   </tbody>
 </table>`;
-const createTable = (html) => {
-  var template = document.createElement("template");
-  html = html.trim(); // Never return a text node of whitespace as the result
-  template.innerHTML = html;
-  return template.content.firstChild;
-};
+  const createTable = (html) => {
+    var template = document.createElement("template");
+    html = html.trim(); // Never return a text node of whitespace as the result
+    template.innerHTML = html;
+    return template.content.firstChild;
+  };
 
-const domTable = createTable(table);
+  const domTable = createTable(table);
 
-//// FAQ
-// <h2>FAQ</h2>
-// <details>
-//   <summary>Some summary/details can't hurt!</summary>
-//   <p>Lorem ipsum dolor sit blah blah.</p>
-// </details>
-// <details>
-//   <summary>Some summary/details can't hurt!</summary>
-//   <p>Lorem ipsum dolor sit blah blah.</p>
-// </details>
-// <details>
-//   <summary>Some summary/details can't hurt!</summary>
-//   <p>Lorem ipsum dolor sit blah blah.</p>
-// </details>
-// <details>
-//   <summary>Some summary/details can't hurt!</summary>
-//   <p>Lorem ipsum dolor sit blah blah.</p>
-// </details>
+  //// FAQ
+  // <h2>FAQ</h2>
+  // <details>
+  //   <summary>Some summary/details can't hurt!</summary>
+  //   <p>Lorem ipsum dolor sit blah blah.</p>
+  // </details>
+  // <details>
+  //   <summary>Some summary/details can't hurt!</summary>
+  //   <p>Lorem ipsum dolor sit blah blah.</p>
+  // </details>
+  // <details>
+  //   <summary>Some summary/details can't hurt!</summary>
+  //   <p>Lorem ipsum dolor sit blah blah.</p>
+  // </details>
+  // <details>
+  //   <summary>Some summary/details can't hurt!</summary>
+  //   <p>Lorem ipsum dolor sit blah blah.</p>
+  // </details>
 
-const faq = document.createElement("h2");
-faq.innerHTML = "FAQ";
+  const faq = document.createElement("h2");
+  faq.innerHTML = "FAQ";
 
-const addQA = () => {
-  const details = document.createElement("details");
-  const question = document.createElement("summary");
-  const answer = document.createElement("p");
-  question.innerHTML = "Some summary/details can't hurt!";
-  answer.innerHTML = "Lorem ipsum dolor sit blah blah.";
+  const addQA = () => {
+    const details = document.createElement("details");
+    const question = document.createElement("summary");
+    const answer = document.createElement("p");
+    question.innerHTML = "Some summary/details can't hurt!";
+    answer.innerHTML = "Lorem ipsum dolor sit blah blah.";
 
-  details.appendChild(question);
-  details.appendChild(answer);
-  faq.after(details);
-};
+    details.appendChild(question);
+    details.appendChild(answer);
+    faq.after(details);
+  };
 
-//// updated
-// <p><strong>最終更新日</strong>：<span style="text-decoration: underline;">2022-12-09</span></p>
+  //// updated
+  // <p><strong>最終更新日</strong>：<span style="text-decoration: underline;">2022-12-09</span></p>
 
-const updated = document.createElement("p");
-const updatedWord = document.createElement("strong");
-updatedWord.innerHTML = "最終更新日";
-const updatedDate = document.createElement("span");
-updatedDate.setAttribute("style", "text-decoration: underline;");
-updatedDate.innerHTML = "2022-12-09";
-updated.appendChild(updatedWord);
-updated.append(": ");
-updated.appendChild(updatedDate);
+  const updated = document.createElement("p");
+  const updatedWord = document.createElement("strong");
+  updatedWord.innerHTML = "最終更新日";
+  const updatedDate = document.createElement("span");
+  updatedDate.setAttribute("style", "text-decoration: underline;");
+  updatedDate.innerHTML = "2022-12-09";
+  updated.appendChild(updatedWord);
+  updated.append(": ");
+  updated.appendChild(updatedDate);
 
-////
-// <img src="/assets/images/content/1.png" alt="/assets/images/content/1.png"/>
-// <img src="/assets/images/content/2.png" alt="/assets/images/content/2.png"/>
-// <img src="/assets/images/content/3.png" alt="/assets/images/content/3.png"/>
-// <img src="/assets/images/content/4.png" alt="/assets/images/content/4.png"/>
-// <img src="/assets/images/content/5.png" alt="/assets/images/content/5.png"/>
+  ////
+  // <img src="/assets/images/content/1.png" alt="/assets/images/content/1.png"/>
+  // <img src="/assets/images/content/2.png" alt="/assets/images/content/2.png"/>
+  // <img src="/assets/images/content/3.png" alt="/assets/images/content/3.png"/>
+  // <img src="/assets/images/content/4.png" alt="/assets/images/content/4.png"/>
+  // <img src="/assets/images/content/5.png" alt="/assets/images/content/5.png"/>
 
-const createImage = (src) => {
-  const image = document.createElement("img");
-  image.setAttribute("src", src);
-  image.setAttribute("alt", src);
+  const createImage = (src) => {
+    const image = document.createElement("img");
+    image.setAttribute("src", src);
+    image.setAttribute("alt", src);
 
-  return image;
-};
-
-const formatContent = (htmlContent) => {
-  const parser = new DOMParser();
-  const document = parser.parseFromString(htmlContent, "text/html");
+    return image;
+  };
 
   // create custom id's on headings
 
@@ -342,11 +347,21 @@ const formatContent = (htmlContent) => {
   };
 
   insertImages(
-    "/assets/images/content/1.png",
-    "/assets/images/content/2.png",
-    "/assets/images/content/3.png",
-    "/assets/images/content/4.png",
-    "/assets/images/content/5.png"
+    isDemo
+      ? window.location.origin + "/oowg/assets/images/content/1.png"
+      : "/assets/images/content/1.png",
+    isDemo
+      ? window.location.origin + "/oowg/assets/images/content/2.png"
+      : "/assets/images/content/2.png",
+    isDemo
+      ? window.location.origin + "/oowg/assets/images/content/3.png"
+      : "/assets/images/content/3.png",
+    isDemo
+      ? window.location.origin + "/oowg/assets/images/content/4.png"
+      : "/assets/images/content/4.png",
+    isDemo
+      ? window.location.origin + "/oowg/assets/images/content/5.png"
+      : "/assets/images/content/5.png"
   );
 
   // add table
