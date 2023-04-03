@@ -298,21 +298,27 @@ const formatContent = (htmlContent) => {
   // add button
   if (document.getElementsByTagName("p")[0]) {
     document.getElementsByTagName("p")[0].after(button);
+  }
+
+  // add toc
+
+  if (document.getElementsByTagName("p").length > 3) {
     document.getElementsByTagName("p")[1].after(tableOfContents);
   }
 
   // add updated
-  document.getElementsByTagName("p")[documentLength - 1].after(updated);
+  if (document.getElementsByTagName("p")[documentLength - 1]) {
+    document.getElementsByTagName("p")[documentLength - 1].after(updated);
+  }
 
   // add faq
   if (document.getElementsByTagName("p")[documentLength - 1]) {
     document.getElementsByTagName("p")[documentLength - 1].after(faq);
+    addQA();
+    addQA();
+    addQA();
+    addQA();
   }
-
-  addQA();
-  addQA();
-  addQA();
-  addQA();
 
   // arrange images throughout the text
   const insertImages = (...images) => {
