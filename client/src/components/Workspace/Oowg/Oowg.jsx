@@ -7,7 +7,7 @@ import {
   getWaterCss,
   getCustomStyles,
   getDemoData,
-} from "../../../../public/oowg/functions.js";
+} from "./functions.js";
 
 export default function React() {
   const [language, setLanguage] = useState(getDemoData().language);

@@ -1,3 +1,5 @@
+import formatContent from "./format-content.js";
+
 const getDemoData = () => {
   return {
     language: "en",
@@ -38,45 +40,6 @@ const getCustomStyles = async () => {
   return await res.text();
 };
 
-const formatContent = (htmlContent) => {
-  const parser = new DOMParser();
-  const document = parser.parseFromString(htmlContent, "text/html");
-
-  // [name, url]
-  const tableOfContentsData = [];
-
-  // create custom id's on headings
-
-  [...document.getElementsByTagName("h1")].map((el, index) => {
-    const heading = document.getElementsByTagName(el.tagName)[index];
-    const myHeading = document.createElement(el.tagName);
-    myHeading.setAttribute("id", "h1_" + (index + 1));
-    myHeading.innerHTML = heading.innerText;
-    heading.parentNode.replaceChild(myHeading, heading);
-  });
-
-  [...document.getElementsByTagName("h2")].map((el, index) => {
-    const heading = document.getElementsByTagName(el.tagName)[index];
-    const myHeading = document.createElement(el.tagName);
-    myHeading.setAttribute("id", "h2_" + (index + 1));
-    myHeading.innerHTML = heading.innerText;
-    heading.parentNode.replaceChild(myHeading, heading);
-    // push to table on contents
-    tableOfContentsData.push([heading.innerText, "h2_" + (index + 1)]);
-  });
-
-  const tableOfContents =
-    "<ol>" +
-    tableOfContentsData.map(
-      (el) => ` <li><a href="#${el[1]}">💯 ${el[0]}</a></li>` + "</ol>"
-    );
-
-  document.body.append("Some text");
-
-  // console.log(document.body.innerHTML);
-  return htmlContent;
-};
-
 const generateHtmlTemplate = ({
   language,
   title,
@@ -108,37 +71,10 @@ const generateHtmlTemplate = ({
     <!-- custom <b> in sentences with keyword -->
     <!-- pluses and minuses -->
 
-    <!-- banner -->
-    <img src="/assets/images/banner.jpg" style="border-radius: 10px" alt="/assets/images/banner.jpg"/>
 
     <!-- updated -->
     <p><strong>最終更新日</strong>：<span style="text-decoration: underline;">2022-12-09</span></p>
 
-    <!-- table of contents -->
-
-    <ol>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#bons-casino">💯 一般情報</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#login">🌐 ログイン</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#registration">🔥 登録</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#freespins">🎲 フリースピン</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#promocode">⚽ ボーナス</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#software">🏆 ソフトウェア</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#live">🎰 ライブ</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#products">💲 ブランド</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#mobile">💻 モバイル版</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#signup">📱 サインアップ</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#vip">💳 VIP</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#service">💬 サポート</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#tournament">💼 トーナメント</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#reviews">🔰 レビュー</a></li>
-        <li><a href="https://xn--lck0ae6f0c4g.xn--tckwe/#faq">❓ よくある質問</a></li>
-    </ol>
-
-
-    <!-- button -->
-    <center>
-        <button type="button" id="copy-button" class="blob">🔥 Играть</button>
-    </center>
 
     <!-- content images with alt -->
 
