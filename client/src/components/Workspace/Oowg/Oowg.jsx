@@ -57,6 +57,7 @@ export default function React() {
         title,
         description,
         htmlContent,
+        isDemo: true,
       }),
     ],
     { type: "text/html" }
