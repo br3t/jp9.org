@@ -233,24 +233,7 @@ const generateHtmlTemplate = ({
         </tr>
         </tbody>
     </table>
-    <!-- FAQ -->
-    <h2>FAQ</h2>
-    <details>
-        <summary>Some summary/details can't hurt!</summary>
-        <p>Lorem ipsum dolor sit blah blah.</p>
-    </details>
-    <details>
-        <summary>Some summary/details can't hurt!</summary>
-        <p>Lorem ipsum dolor sit blah blah.</p>
-    </details>
-    <details>
-        <summary>Some summary/details can't hurt!</summary>
-        <p>Lorem ipsum dolor sit blah blah.</p>
-    </details>
-    <details>
-        <summary>Some summary/details can't hurt!</summary>
-        <p>Lorem ipsum dolor sit blah blah.</p>
-    </details>
+
 
 </article>
 

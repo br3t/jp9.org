@@ -36,6 +36,40 @@ button.innerHTML = "🔥🔥 Play 🔥🔥";
 // </ol>
 const tableOfContents = document.createElement("ol");
 
+//// FAQ
+// <h2>FAQ</h2>
+// <details>
+//   <summary>Some summary/details can't hurt!</summary>
+//   <p>Lorem ipsum dolor sit blah blah.</p>
+// </details>
+// <details>
+//   <summary>Some summary/details can't hurt!</summary>
+//   <p>Lorem ipsum dolor sit blah blah.</p>
+// </details>
+// <details>
+//   <summary>Some summary/details can't hurt!</summary>
+//   <p>Lorem ipsum dolor sit blah blah.</p>
+// </details>
+// <details>
+//   <summary>Some summary/details can't hurt!</summary>
+//   <p>Lorem ipsum dolor sit blah blah.</p>
+// </details>
+
+const faq = document.createElement("h2");
+faq.innerHTML = "FAQ";
+
+const addQA = () => {
+  const details = document.createElement("details");
+  const question = document.createElement("summary");
+  const answer = document.createElement("p");
+  question.innerHTML = "Some summary/details can't hurt!";
+  answer.innerHTML = "Lorem ipsum dolor sit blah blah.";
+
+  details.appendChild(question);
+  details.appendChild(answer);
+  faq.after(details);
+};
+
 const formatContent = (htmlContent) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
@@ -76,6 +110,14 @@ const formatContent = (htmlContent) => {
   // add button
   document.getElementsByTagName("p")[0].after(button);
   document.getElementsByTagName("p")[1].after(tableOfContents);
+
+  // add faq
+  document.getElementsByTagName("p")[documentLength - 1].after(faq);
+
+  addQA();
+  addQA();
+  addQA();
+  addQA();
 
   // console.log(document.body.innerHTML);
   // return htmlContent
