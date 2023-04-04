@@ -108,44 +108,6 @@ export default function React() {
 
                 {/*flex items-center justify-center rounded-xl bg-gray-50 border-2 border-dashed border-gray-200 text-gray-400 py-64 dark:bg-gray-800 dark:border-gray-700*/}
                 <div className="">
-                  <iframe
-                    src={iFrameSrc}
-                    frameBorder="0"
-                    width={"100%"}
-                    height={"1000"}
-                  ></iframe>
-                  {/*<HTMLString*/}
-                  {/*  html={generateHtmlTemplate({*/}
-                  {/*    language,*/}
-                  {/*    domainName,*/}
-                  {/*    title,*/}
-                  {/*    description,*/}
-                  {/*    htmlContent,*/}
-                  {/*  })}*/}
-                  {/*/>*/}
-                </div>
-                {/*
-
-                ADD YOUR MAIN CONTENT ABOVE
-
-                */}
-              </div>
-              {/* END Main Content */}
-
-              {/* Side content */}
-              <div
-                className={`lg:block order-first lg:order-last lg:col-span-4 p-5 lg:p-6 bg-white shadow-sm rounded-lg dark:bg-gray-900`}
-              >
-                {/*
-
-                ADD YOUR SIDE CONTENT BELOW
-
-                */}
-
-                {/* Placeholder */}
-
-                {/*flex items-center justify-center rounded-xl bg-gray-50 border-2 border-dashed border-gray-200 text-gray-400 py-64 dark:bg-gray-800 dark:border-gray-700*/}
-                <div className="">
                   {/*min-h-screen flex items-center justify-center overflow-hidden max-w-10xl mx-auto p-4 lg:p-8 w-full*/}
                   <div className="">
                     {/* Installation Section */}
@@ -421,6 +383,44 @@ export default function React() {
                     {/* END Installation Section */}
                   </div>
                 </div>
+
+                {/*
+
+                ADD YOUR MAIN CONTENT ABOVE
+
+                */}
+              </div>
+              {/* END Main Content */}
+
+              {/* Side content */}
+              <div
+                className={`lg:block order-first lg:order-last lg:col-span-4 p-5 lg:p-6 bg-white shadow-sm rounded-lg dark:bg-gray-900`}
+              >
+                {/*flex items-center justify-center rounded-xl bg-gray-50 border-2 border-dashed border-gray-200 text-gray-400 py-64 dark:bg-gray-800 dark:border-gray-700*/}
+                <div className="">
+                  <iframe
+                    src={iFrameSrc}
+                    frameBorder="0"
+                    width={"100%"}
+                    height={"1000"}
+                  ></iframe>
+                  {/*<HTMLString*/}
+                  {/*  html={generateHtmlTemplate({*/}
+                  {/*    language,*/}
+                  {/*    domainName,*/}
+                  {/*    title,*/}
+                  {/*    description,*/}
+                  {/*    htmlContent,*/}
+                  {/*  })}*/}
+                  {/*/>*/}
+                </div>
+                {/*
+
+                ADD YOUR SIDE CONTENT BELOW
+
+                */}
+
+                {/* Placeholder */}
 
                 {/*
 
