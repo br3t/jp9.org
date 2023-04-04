@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
 import HTMLString from "react-html-string";
@@ -15,7 +15,13 @@ export default function React() {
   const [domainName, setDomainName] = useState(getDemoData().domainName);
   const [title, setTitle] = useState(getDemoData().title);
   const [description, setDescription] = useState(getDemoData().description);
-  const [htmlContent, setHtmlContent] = useState(getDemoData().htmlContent);
+  const [htmlContent, setHtmlContent] = useState(
+    getDemoData(language).htmlContent
+  );
+
+  useEffect(() => {
+    setHtmlContent(getDemoData(language).htmlContent);
+  }, [language]);
 
   const [contentImages, setContentImages] = useState(getDemoData().demoImages);
   const maxNumber = 69;

@@ -1,4 +1,6 @@
-const formatContent = (htmlContent, isDemo, contentImages) => {
+import { getTranslate } from "./functions.js";
+
+const formatContent = (htmlContent, isDemo, contentImages, language) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
 
@@ -20,7 +22,7 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
   button.setAttribute("type", "button");
   button.setAttribute("id", "copy-button");
   button.setAttribute("class", "blob");
-  button.innerHTML = "🔥🔥 Play 🔥🔥";
+  button.innerHTML = getTranslate(language, "play_button_text");
 
   //// table of contents
   // <ol>
@@ -220,7 +222,7 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
   // </details>
 
   const faq = document.createElement("h2");
-  faq.innerHTML = "FAQ";
+  faq.innerHTML = getTranslate(language, "faq_heading");
 
   const addQA = () => {
     const details = document.createElement("details");
@@ -239,10 +241,10 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
 
   const updated = document.createElement("p");
   const updatedWord = document.createElement("strong");
-  updatedWord.innerHTML = "最終更新日";
+  updatedWord.innerHTML = getTranslate(language, "updated_text");
   const updatedDate = document.createElement("span");
   updatedDate.setAttribute("style", "text-decoration: underline;");
-  updatedDate.innerHTML = "2022-12-09";
+  updatedDate.innerHTML = new Date().toISOString().split("T")[0];
   updated.appendChild(updatedWord);
   updated.append(": ");
   updated.appendChild(updatedDate);
@@ -309,13 +311,13 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
   }
 
   // add faq
-  if (document.getElementsByTagName("p")[documentLength - 1]) {
-    document.getElementsByTagName("p")[documentLength - 1].after(faq);
-    addQA();
-    addQA();
-    addQA();
-    addQA();
-  }
+  // if (document.getElementsByTagName("p")[documentLength - 1]) {
+  //   document.getElementsByTagName("p")[documentLength - 1].after(faq);
+  //   addQA();
+  //   addQA();
+  //   addQA();
+  //   addQA();
+  // }
 
   // arrange images throughout the text
   const insertImages = (images) => {
@@ -388,9 +390,9 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
 
   // add table
   // it's better to add table the last one, because it has <p> elements, but images insteting between paragraphs
-  if (document.getElementsByTagName("p")[2]) {
-    document.getElementsByTagName("p")[2].after(domTable);
-  }
+  // if (document.getElementsByTagName("p")[2]) {
+  //   document.getElementsByTagName("p")[2].after(domTable);
+  // }
 
   // console.log(document.body.innerHTML);
   // return htmlContent
