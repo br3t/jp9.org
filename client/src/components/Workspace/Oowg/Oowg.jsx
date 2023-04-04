@@ -17,7 +17,7 @@ export default function React() {
   const [description, setDescription] = useState(getDemoData().description);
   const [htmlContent, setHtmlContent] = useState(getDemoData().htmlContent);
 
-  const [contentImages, setContentImages] = useState([]);
+  const [contentImages, setContentImages] = useState(getDemoData().demoImages);
   const maxNumber = 69;
 
   const onChange = (imageList, addUpdateIndex) => {
@@ -356,20 +356,20 @@ export default function React() {
                                                   width="100"
                                                 />
                                                 <div className="image-item__btn-wrapper">
-                                                  <button
+                                                  <span
                                                     onClick={() =>
                                                       onImageUpdate(index)
                                                     }
                                                   >
                                                     Update
-                                                  </button>
-                                                  <button
+                                                  </span>
+                                                  <span
                                                     onClick={() =>
                                                       onImageRemove(index)
                                                     }
                                                   >
                                                     Remove
-                                                  </button>
+                                                  </span>
                                                 </div>
                                               </div>
                                             ))}

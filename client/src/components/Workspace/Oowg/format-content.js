@@ -1,6 +1,9 @@
 const formatContent = (htmlContent, isDemo, contentImages) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
+
+  console.log(contentImages);
+
   //// banner
   // <img src="/assets/images/banner.jpg" style="border-radius: 10px" alt="/assets/images/banner.jpg"/>
   const banner = document.createElement("img");
@@ -11,10 +14,7 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
       : "/assets/images/banner.jpg"
   );
   banner.setAttribute("alt", "/assets/images/banner.jpg");
-  banner.setAttribute(
-    "style",
-    'border-radius: 10px" alt="/assets/images/banner.jpg'
-  );
+  banner.setAttribute("style", "border-radius: 10px");
 
   //// button
   // <button type="button" id="copy-button" class="blob">🔥🔥 Play 🔥🔥</button>
@@ -332,18 +332,20 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
         pictureEveryNParagraphs = 1;
       }
 
-      const imagesStack = images.reduce((acc, image) => {
-        if (image.file.name === "banner.jpg") {
-          // add banner
-          if (document.getElementsByTagName("h1")[0]) {
-            document.getElementsByTagName("h1")[0].after(banner);
+      const imagesStack = images
+        .reduce((acc, image) => {
+          if (image.file.name === "banner.jpg") {
+            // add banner
+            if (document.getElementsByTagName("h1")[0]) {
+              document.getElementsByTagName("h1")[0].after(banner);
+            }
+            return acc;
+          } else {
+            acc.push(image);
+            return acc;
           }
-          return acc;
-        } else {
-          acc.push(image);
-          return acc;
-        }
-      }, []);
+        }, [])
+        .reverse();
 
       if (imagesStack.length > 0) {
         for (let i = 1; i <= documentLength - 2; i += 1) {
