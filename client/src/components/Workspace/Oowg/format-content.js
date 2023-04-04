@@ -294,11 +294,6 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
 
   const documentLength = document.getElementsByTagName("p").length;
 
-  // add banner
-  if (document.getElementsByTagName("h1")[0]) {
-    document.getElementsByTagName("h1")[0].after(banner);
-  }
-
   // add button
   if (document.getElementsByTagName("p")[0]) {
     document.getElementsByTagName("p")[0].after(button);
@@ -329,25 +324,42 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
     const imagesLength = images ? images.length : 0;
 
     if (imagesLength > 0) {
-      const pictureEveryNParagraphs = Math.floor(
+      let pictureEveryNParagraphs = Math.floor(
         (documentLength - 2) / imagesLength
       );
 
-      const imagesStack = [...images].reverse();
+      if (pictureEveryNParagraphs === 0) {
+        pictureEveryNParagraphs = 1;
+      }
 
-      for (let i = 1; i <= documentLength - 2; i += 1) {
-        if (i % pictureEveryNParagraphs === 0 && imagesLength > 0) {
-          const image = imagesStack.pop();
-          if (image) {
-            isDemo
-              ? document
-                  .getElementsByTagName("p")
-                  [i].after(createImage(image.data_url))
-              : document
-                  .getElementsByTagName("p")
-                  [i].after(
-                    createImage("/assets/images/content/" + image.file.name)
-                  );
+      const imagesStack = images.reduce((acc, image) => {
+        if (image.file.name === "banner.jpg") {
+          // add banner
+          if (document.getElementsByTagName("h1")[0]) {
+            document.getElementsByTagName("h1")[0].after(banner);
+          }
+          return acc;
+        } else {
+          acc.push(image);
+          return acc;
+        }
+      }, []);
+
+      if (imagesStack.length > 0) {
+        for (let i = 1; i <= documentLength - 2; i += 1) {
+          if (i % pictureEveryNParagraphs === 0 && imagesLength > 0) {
+            const image = imagesStack.pop();
+            if (image) {
+              isDemo
+                ? document
+                    .getElementsByTagName("p")
+                    [i].after(createImage(image.data_url))
+                : document
+                    .getElementsByTagName("p")
+                    [i].after(
+                      createImage("/assets/images/content/" + image.file.name)
+                    );
+            }
           }
         }
       }
