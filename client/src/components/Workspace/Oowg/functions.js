@@ -47,6 +47,7 @@ const generateHtmlTemplate = ({
   domainName,
   htmlContent,
   isDemo,
+  contentImages,
 }) => {
   return `<!DOCTYPE html>
 <html lang="${language}">
@@ -67,7 +68,7 @@ const generateHtmlTemplate = ({
 <article>
     <!-- content with anchor id headings -->
   
-    ${formatContent(htmlContent, isDemo)}
+    ${formatContent(htmlContent, isDemo, contentImages)}
 
     <!-- custom article ul, ol, tables -->
     <!-- custom <b> in sentences with keyword -->

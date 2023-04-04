@@ -1,7 +1,6 @@
-const formatContent = (htmlContent, isDemo) => {
+const formatContent = (htmlContent, isDemo, contentImages) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
-
   //// banner
   // <img src="/assets/images/banner.jpg" style="border-radius: 10px" alt="/assets/images/banner.jpg"/>
   const banner = document.createElement("img");
@@ -326,43 +325,54 @@ const formatContent = (htmlContent, isDemo) => {
   }
 
   // arrange images throughout the text
-  const insertImages = (...images) => {
-    const imagesLength = images.length;
+  const insertImages = (images) => {
+    const imagesLength = images ? images.length : 0;
 
-    const pictureEveryNParagraphs = Math.floor(
-      (documentLength - 2) / imagesLength
-    );
+    if (imagesLength > 0) {
+      const pictureEveryNParagraphs = Math.floor(
+        (documentLength - 2) / imagesLength
+      );
 
-    const imagesStack = [...images].reverse();
+      const imagesStack = [...images].reverse();
 
-    for (let i = 1; i <= documentLength - 2; i += 1) {
-      if (i % pictureEveryNParagraphs === 0) {
-        const image = imagesStack.pop();
-
-        if (image) {
-          document.getElementsByTagName("p")[i].after(createImage(image));
+      for (let i = 1; i <= documentLength - 2; i += 1) {
+        if (i % pictureEveryNParagraphs === 0 && imagesLength > 0) {
+          const image = imagesStack.pop();
+          if (image) {
+            isDemo
+              ? document
+                  .getElementsByTagName("p")
+                  [i].after(createImage(image.data_url))
+              : document
+                  .getElementsByTagName("p")
+                  [i].after(
+                    createImage("/assets/images/content/" + image.file.name)
+                  );
+          }
         }
       }
     }
   };
 
-  insertImages(
-    isDemo
-      ? window.location.origin + "/oowg/assets/images/content/1.png"
-      : "/assets/images/content/1.png",
-    isDemo
-      ? window.location.origin + "/oowg/assets/images/content/2.png"
-      : "/assets/images/content/2.png",
-    isDemo
-      ? window.location.origin + "/oowg/assets/images/content/3.png"
-      : "/assets/images/content/3.png",
-    isDemo
-      ? window.location.origin + "/oowg/assets/images/content/4.png"
-      : "/assets/images/content/4.png",
-    isDemo
-      ? window.location.origin + "/oowg/assets/images/content/5.png"
-      : "/assets/images/content/5.png"
-  );
+  insertImages(contentImages);
+
+  // insertImages(
+  //   isDemo
+  //     ? window.location.origin + "/oowg/assets/images/content/1.png"
+  //     : "/assets/images/content/1.png",
+  //   isDemo
+  //     ? window.location.origin + "/oowg/assets/images/content/2.png"
+  //     : "/assets/images/content/2.png",
+  //   isDemo
+  //     ? window.location.origin + "/oowg/assets/images/content/3.png"
+  //     : "/assets/images/content/3.png",
+  //   isDemo
+  //     ? window.location.origin + "/oowg/assets/images/content/4.png"
+  //     : "/assets/images/content/4.png",
+  //   isDemo
+  //     ? window.location.origin + "/oowg/assets/images/content/5.png"
+  //     : "/assets/images/content/5.png"
+  // );
 
   // add table
   // it's better to add table the last one, because it has <p> elements, but images insteting between paragraphs

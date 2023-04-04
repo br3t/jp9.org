@@ -8,6 +8,7 @@ import {
   getCustomStyles,
   getDemoData,
 } from "./functions.js";
+import ImageUploading from "react-images-uploading";
 
 export default function React() {
   const [language, setLanguage] = useState(getDemoData().language);
@@ -16,6 +17,14 @@ export default function React() {
   const [description, setDescription] = useState(getDemoData().description);
   const [htmlContent, setHtmlContent] = useState(getDemoData().htmlContent);
 
+  const [contentImages, setContentImages] = useState([]);
+  const maxNumber = 69;
+
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    // console.log(imageList, addUpdateIndex);
+    setContentImages(imageList);
+  };
   const createWebsiteArchive = async () => {
     const zip = new JSZip();
 
@@ -27,12 +36,21 @@ export default function React() {
         title,
         description,
         htmlContent,
+        contentImages,
       })
     );
     zip.file("assets/styles/water.min.css", getWaterCss());
     zip.file("assets/styles/style.css", getCustomStyles());
-    const img = zip.folder("assets/images");
+    const contentImg = zip.folder("assets/images/content");
+
     // img.file("image.jpg", imgData, { base64: true });
+    contentImages.map((image, index) => {
+      contentImg.file(
+        image.file.name,
+        image.data_url.split("data:image/jpeg;base64,")[1],
+        { base64: true }
+      );
+    });
 
     const configFile = {
       language,
@@ -58,11 +76,14 @@ export default function React() {
         description,
         htmlContent,
         isDemo: true,
+        contentImages,
       }),
     ],
     { type: "text/html" }
   );
+
   const iFrameSrc = URL.createObjectURL(blobContent);
+
   return (
     <>
       {/* Page Container */}
@@ -287,6 +308,67 @@ export default function React() {
                                     </div>
                                   </div>
                                 </div>
+                                <ImageUploading
+                                  multiple
+                                  value={contentImages}
+                                  onChange={onChange}
+                                  maxNumber={maxNumber}
+                                  dataURLKey="data_url"
+                                >
+                                  {({
+                                    imageList,
+                                    onImageUpload,
+                                    onImageRemoveAll,
+                                    onImageUpdate,
+                                    onImageRemove,
+                                    isDragging,
+                                    dragProps,
+                                  }) => (
+                                    // write your building UI
+                                    <div className="upload__image-wrapper">
+                                      <button
+                                        style={
+                                          isDragging
+                                            ? { color: "red" }
+                                            : undefined
+                                        }
+                                        onClick={onImageUpload}
+                                        {...dragProps}
+                                      >
+                                        Click or Drop here
+                                      </button>
+                                      &nbsp;
+                                      <button onClick={onImageRemoveAll}>
+                                        Remove all images
+                                      </button>
+                                      {imageList.map((image, index) => (
+                                        <div key={index} className="image-item">
+                                          <img
+                                            src={image["data_url"]}
+                                            alt=""
+                                            width="100"
+                                          />
+                                          <div className="image-item__btn-wrapper">
+                                            <button
+                                              onClick={() =>
+                                                onImageUpdate(index)
+                                              }
+                                            >
+                                              Update
+                                            </button>
+                                            <button
+                                              onClick={() =>
+                                                onImageRemove(index)
+                                              }
+                                            >
+                                              Remove
+                                            </button>
+                                          </div>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                </ImageUploading>
                                 {/* END Form Switches: With Labels and Description */}
                               </div>
                             </div>
