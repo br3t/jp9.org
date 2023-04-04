@@ -11,7 +11,7 @@ const formatContent = (htmlContent, isDemo, contentImages, language) => {
     "src",
     isDemo
       ? window.location.origin + "/oowg/assets/images/banner.jpg"
-      : "/assets/images/banner.jpg"
+      : "/assets/images/content/banner.jpg"
   );
   banner.setAttribute("alt", "/assets/images/banner.jpg");
   banner.setAttribute("style", "border-radius: 10px");
