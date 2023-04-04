@@ -13,7 +13,7 @@ const formatContent = (htmlContent, isDemo, contentImages, language) => {
       ? window.location.origin + "/oowg/assets/images/banner.jpg"
       : "/assets/images/content/banner.jpg"
   );
-  banner.setAttribute("alt", "/assets/images/banner.jpg");
+  banner.setAttribute("alt", "banner");
   banner.setAttribute("style", "border-radius: 10px");
 
   //// button
@@ -259,7 +259,25 @@ const formatContent = (htmlContent, isDemo, contentImages, language) => {
   const createImage = (src) => {
     const image = document.createElement("img");
     image.setAttribute("src", src);
-    image.setAttribute("alt", src);
+    image.setAttribute(
+      "alt",
+      src.split("/assets/images/content/")[1]
+        ? src
+            .split("/assets/images/content/")[1]
+            .replaceAll("-", " ")
+            .replaceAll("_", " ")
+            .split(".jpg")[0]
+            .split(".png")[0]
+            .split(".jpeg")[0]
+            .split(".gif")[0]
+        : src
+            .replaceAll("-", " ")
+            .replaceAll("_", " ")
+            .split(".jpg")[0]
+            .split(".png")[0]
+            .split(".jpeg")[0]
+            .split(".gif")[0]
+    );
 
     return image;
   };
