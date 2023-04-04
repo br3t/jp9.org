@@ -204,6 +204,7 @@ export default function React() {
                                     onChange={(e) => {
                                       setLanguage(e.target.value);
                                     }}
+                                    value={`${language}`}
                                   />
                                   <p className="text-sm text-gray-500 underline underline-offset-1">
                                     <a href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes">
@@ -224,6 +225,7 @@ export default function React() {
                                       setDomainName(e.target.value)
                                     }
                                     placeholder="example.com"
+                                    value={`${domainName}`}
                                   />
                                 </div>
                               </div>
@@ -244,6 +246,7 @@ export default function React() {
                                     name="seo_title"
                                     placeholder="SEO title"
                                     onChange={(e) => setTitle(e.target.value)}
+                                    value={`${title}`}
                                   />
                                 </div>
                                 <div className="space-y-1">
@@ -259,6 +262,7 @@ export default function React() {
                                     onChange={(e) =>
                                       setDescription(e.target.value)
                                     }
+                                    value={`${description}`}
                                   />
                                 </div>
                                 <div className="space-y-1">
@@ -268,16 +272,18 @@ export default function React() {
                                   >
                                     HTML content
                                   </label>
-                                  <input
-                                    className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-                                    type="text"
+                                  <textarea
+                                    className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 h-96"
+                                    rows="5"
+                                    name="description"
                                     id="html_content"
                                     name="html_content"
                                     placeholder="HTML content (seo text)"
+                                    value={`${htmlContent}`}
                                     onChange={(e) =>
                                       setHtmlContent(e.target.value)
                                     }
-                                  />
+                                  ></textarea>
                                 </div>
                               </div>
                             </div>
@@ -287,6 +293,93 @@ export default function React() {
                             <div className="p-5 lg:p-6 grow w-full">
                               <div className="sm:p-5 lg:px-10 lg:py-9 space-y-6">
                                 {/* Form Switches: With Labels and Description */}
+
+                                <div className="space-y-6">
+                                  <div className="space-x-2">
+                                    <div className="flex justify-between items-center space-x-3">
+                                      <label
+                                        htmlFor="switch1"
+                                        className="font-medium leading-relaxed"
+                                      >
+                                        Images
+                                        <span className="block text-sm text-gray-500">
+                                          Use filename banner.jpg for upload
+                                          banner
+                                        </span>
+                                      </label>
+                                      <ImageUploading
+                                        multiple
+                                        value={contentImages}
+                                        onChange={onChange}
+                                        maxNumber={maxNumber}
+                                        dataURLKey="data_url"
+                                      >
+                                        {({
+                                          imageList,
+                                          onImageUpload,
+                                          onImageRemoveAll,
+                                          onImageUpdate,
+                                          onImageRemove,
+                                          isDragging,
+                                          dragProps,
+                                        }) => (
+                                          // write your building UI
+                                          <div className="upload__image-wrapper">
+                                            <span
+                                              className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                                              style={
+                                                isDragging
+                                                  ? { color: "red" }
+                                                  : undefined
+                                              }
+                                              onClick={onImageUpload}
+                                              {...dragProps}
+                                            >
+                                              <span>
+                                                Click or Drop images here
+                                              </span>
+                                            </span>
+                                            <br />
+                                            {imageList.length > 0 && (
+                                              <span onClick={onImageRemoveAll}>
+                                                Remove all images
+                                              </span>
+                                            )}
+                                            {imageList.map((image, index) => (
+                                              <div
+                                                key={index}
+                                                className="image-item"
+                                              >
+                                                <img
+                                                  src={image["data_url"]}
+                                                  alt=""
+                                                  width="100"
+                                                />
+                                                <div className="image-item__btn-wrapper">
+                                                  <button
+                                                    onClick={() =>
+                                                      onImageUpdate(index)
+                                                    }
+                                                  >
+                                                    Update
+                                                  </button>
+                                                  <button
+                                                    onClick={() =>
+                                                      onImageRemove(index)
+                                                    }
+                                                  >
+                                                    Remove
+                                                  </button>
+                                                </div>
+                                              </div>
+                                            ))}
+                                          </div>
+                                        )}
+                                      </ImageUploading>
+                                    </div>
+                                  </div>
+                                </div>
+
                                 <div className="space-y-6">
                                   <div className="space-x-2">
                                     <div className="flex justify-between items-center space-x-3">
@@ -308,67 +401,7 @@ export default function React() {
                                     </div>
                                   </div>
                                 </div>
-                                <ImageUploading
-                                  multiple
-                                  value={contentImages}
-                                  onChange={onChange}
-                                  maxNumber={maxNumber}
-                                  dataURLKey="data_url"
-                                >
-                                  {({
-                                    imageList,
-                                    onImageUpload,
-                                    onImageRemoveAll,
-                                    onImageUpdate,
-                                    onImageRemove,
-                                    isDragging,
-                                    dragProps,
-                                  }) => (
-                                    // write your building UI
-                                    <div className="upload__image-wrapper">
-                                      <button
-                                        style={
-                                          isDragging
-                                            ? { color: "red" }
-                                            : undefined
-                                        }
-                                        onClick={onImageUpload}
-                                        {...dragProps}
-                                      >
-                                        Click or Drop here
-                                      </button>
-                                      &nbsp;
-                                      <button onClick={onImageRemoveAll}>
-                                        Remove all images
-                                      </button>
-                                      {imageList.map((image, index) => (
-                                        <div key={index} className="image-item">
-                                          <img
-                                            src={image["data_url"]}
-                                            alt=""
-                                            width="100"
-                                          />
-                                          <div className="image-item__btn-wrapper">
-                                            <button
-                                              onClick={() =>
-                                                onImageUpdate(index)
-                                              }
-                                            >
-                                              Update
-                                            </button>
-                                            <button
-                                              onClick={() =>
-                                                onImageRemove(index)
-                                              }
-                                            >
-                                              Remove
-                                            </button>
-                                          </div>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  )}
-                                </ImageUploading>
+
                                 {/* END Form Switches: With Labels and Description */}
                               </div>
                             </div>
