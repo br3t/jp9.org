@@ -2,8 +2,6 @@ const formatContent = (htmlContent, isDemo, contentImages) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
 
-  console.log(contentImages);
-
   //// banner
   // <img src="/assets/images/banner.jpg" style="border-radius: 10px" alt="/assets/images/banner.jpg"/>
   const banner = document.createElement("img");
