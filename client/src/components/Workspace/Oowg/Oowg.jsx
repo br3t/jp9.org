@@ -214,7 +214,7 @@ export default function React() {
                                     <small>
                                       change this value will reload demo data
                                       (HTML content, button text and link, faq
-                                      questions and answers
+                                      questions and answers)
                                     </small>
                                   </p>
                                 </div>
