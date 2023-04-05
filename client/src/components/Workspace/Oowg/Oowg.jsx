@@ -79,6 +79,9 @@ export default function React() {
       title,
       description,
       htmlContent,
+      buttonLink,
+      buttonText,
+      faq,
     };
 
     zip.file("config.json", JSON.stringify(configFile));
