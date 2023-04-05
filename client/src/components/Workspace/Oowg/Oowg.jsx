@@ -481,7 +481,7 @@ export default function React() {
                                           <span className="p-4 rounded bg-gray-100 flex items-center justify-between space-x-2">
                                             <div>
                                               <h4 className="font-semibold mb-1">
-                                                {index}. {question}
+                                                {index + 1}. {question}
                                               </h4>
                                               <p className="text-gray-600 text-sm">
                                                 {answer}
