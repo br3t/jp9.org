@@ -27,7 +27,13 @@ export default function React() {
 
   useEffect(() => {
     setHtmlContent(getDemoData(language).htmlContent);
-  }, [language, faq]);
+    setButtonText(getTranslate(language, "play_button_text"));
+  }, [language]);
+
+  useEffect(() => {
+    setHtmlContent(getDemoData(language).htmlContent);
+    setButtonText(getTranslate(language, "play_button_text"));
+  }, [faq]);
 
   const [contentImages, setContentImages] = useState(getDemoData().demoImages);
   const maxNumber = 69;
