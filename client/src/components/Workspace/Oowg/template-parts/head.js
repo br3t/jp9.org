@@ -11,6 +11,29 @@ const head = (title, description, domainName) => {
     }
     <link rel="canonical" href="https://${domainName}/" />
     <meta name="generator" content="OOWG"/>
+    <script type = "application/ld+json">
+    {
+    "@context": "http://www.schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+            "@type": "WebPage",
+            "@id": "/",
+            "name": "☘️Website"
+        }
+    }, {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+            "@type": "WebPage",
+            "@id": "/#h1_1",
+            "name": "⚡️⚡️⚡️ Click 💸💸💸"
+        }
+    }]
+    }
+    </script>
 </head>`;
 };
 
