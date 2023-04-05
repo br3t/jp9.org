@@ -449,22 +449,22 @@ export default function React() {
                                     />
                                   </div>
                                 </div>
-                                <div className="space-y-1">
-                                  <label htmlFor="host" className="font-medium">
-                                    Domain Name
-                                  </label>
-                                  <input
-                                    className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-                                    type="text"
-                                    id="domain_name"
-                                    name="domain_name"
-                                    onChange={(e) =>
-                                      setDomainName(e.target.value)
-                                    }
-                                    placeholder="example.com"
-                                    value={`${domainName}`}
-                                  />
-                                </div>
+                                {/*<div className="space-y-1">*/}
+                                {/*  <label htmlFor="host" className="font-medium">*/}
+                                {/*    Table*/}
+                                {/*  </label>*/}
+                                {/*  <input*/}
+                                {/*    className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"*/}
+                                {/*    type="text"*/}
+                                {/*    id="domain_name"*/}
+                                {/*    name="domain_name"*/}
+                                {/*    onChange={(e) =>*/}
+                                {/*      setDomainName(e.target.value)*/}
+                                {/*    }*/}
+                                {/*    placeholder="example.com"*/}
+                                {/*    value={`${domainName}`}*/}
+                                {/*  />*/}
+                                {/*</div>*/}
                               </div>
                             </div>
                             <div className="py-4 px-5 lg:px-6 w-full text-center bg-gray-50">
