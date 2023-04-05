@@ -202,13 +202,20 @@ export default function React() {
                                     }}
                                     value={`${language}`}
                                   />
-                                  <p className="text-sm text-gray-500 underline underline-offset-1">
+                                  <p className="text-sm text-gray-500">
                                     <a
                                       href="https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes"
                                       target={"_blank"}
+                                      className={"underline underline-offset-1"}
                                     >
                                       ISO 3166-1 alpha-2
                                     </a>
+                                    ,{" "}
+                                    <small>
+                                      change this value will reload demo data
+                                      (HTML content, button text and link, faq
+                                      questions and answers
+                                    </small>
                                   </p>
                                 </div>
                                 <div className="space-y-1">
