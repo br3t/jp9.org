@@ -455,6 +455,15 @@ export default function React() {
                                 <div className="space-y-1">
                                   <label htmlFor="host" className="font-medium">
                                     FAQ
+                                    {faq.length > 0 && (
+                                      <small
+                                        onClick={() => {
+                                          setFaq([]);
+                                        }}
+                                      >
+                                        [ Clean all QAs ]
+                                      </small>
+                                    )}
                                   </label>
                                   {faq.reverse().map((faq_item, index) => {
                                     const question = faq_item[0];
@@ -462,11 +471,23 @@ export default function React() {
 
                                     return (
                                       <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:space-x-2">
+                                        <label
+                                          htmlFor="name"
+                                          className="font-medium"
+                                        >
+                                          Q:
+                                        </label>
                                         <input
                                           className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                                           disabled
                                           value={question}
                                         />
+                                        <label
+                                          htmlFor="name"
+                                          className="font-medium"
+                                        >
+                                          A:
+                                        </label>
                                         <input
                                           className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                                           disabled
@@ -475,6 +496,13 @@ export default function React() {
                                       </div>
                                     );
                                   })}
+                                  <label
+                                    htmlFor="name"
+                                    className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:space-x-2 font-medium"
+                                  >
+                                    {" "}
+                                    Add QA
+                                  </label>
                                   <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:space-x-2">
                                     <input
                                       className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
@@ -516,6 +544,12 @@ export default function React() {
                                               "faq_answer"
                                             ).value;
                                           setFaq([...faq, [question, answer]]);
+                                          document.getElementById(
+                                            "faq_question"
+                                          ).value = "";
+                                          document.getElementById(
+                                            "faq_answer"
+                                          ).value = "";
                                         }}
                                       >
                                         <svg
