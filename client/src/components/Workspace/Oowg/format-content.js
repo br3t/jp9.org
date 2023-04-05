@@ -7,7 +7,8 @@ const formatContent = (
   language,
   domainName,
   buttonText,
-  buttonLink
+  buttonLink,
+  faq
 ) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
@@ -87,19 +88,19 @@ const formatContent = (
   //   <p>Lorem ipsum dolor sit blah blah.</p>
   // </details>
 
-  const faq = document.createElement("h2");
-  faq.innerHTML = getTranslate(language, "faq_heading");
+  const faqEl = document.createElement("h2");
+  faqEl.innerHTML = getTranslate(language, "faq_heading");
 
-  const addQA = () => {
-    const details = document.createElement("details");
-    const question = document.createElement("summary");
-    const answer = document.createElement("p");
-    question.innerHTML = "Some summary/details can't hurt!";
-    answer.innerHTML = "Lorem ipsum dolor sit blah blah.";
+  const addQA = (question, answer) => {
+    const detailsEl = document.createElement("details");
+    const questionEl = document.createElement("summary");
+    const answerEl = document.createElement("p");
+    questionEl.innerHTML = question;
+    answerEl.innerHTML = answer;
 
-    details.appendChild(question);
-    details.appendChild(answer);
-    faq.after(details);
+    detailsEl.appendChild(questionEl);
+    detailsEl.appendChild(answerEl);
+    faqEl.after(detailsEl);
   };
 
   //// updated
@@ -195,13 +196,14 @@ const formatContent = (
   }
 
   // add faq
-  // if (document.getElementsByTagName("p")[documentLength - 1]) {
-  //   document.getElementsByTagName("p")[documentLength - 1].after(faq);
-  //   addQA();
-  //   addQA();
-  //   addQA();
-  //   addQA();
-  // }
+  if (document.getElementsByTagName("p")[documentLength - 1]) {
+    if (faq.length > 0) {
+      document.getElementsByTagName("p")[documentLength - 1].after(faqEl);
+      faq.reverse().map((faq_item) => {
+        addQA(faq_item[0], faq_item[1]);
+      });
+    }
+  }
 
   // arrange images throughout the text
   const insertImages = (images) => {

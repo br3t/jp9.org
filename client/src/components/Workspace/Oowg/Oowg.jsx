@@ -23,10 +23,11 @@ export default function React() {
     getTranslate(language, "play_button_text")
   );
   const [buttonLink, setButtonLink] = useState("#");
+  const [faq, setFaq] = useState([]);
 
   useEffect(() => {
     setHtmlContent(getDemoData(language).htmlContent);
-  }, [language]);
+  }, [language, faq]);
 
   const [contentImages, setContentImages] = useState(getDemoData().demoImages);
   const maxNumber = 69;
@@ -50,6 +51,7 @@ export default function React() {
         contentImages,
         buttonLink,
         buttonText,
+        faq,
       })
     );
     zip.file("assets/styles/water.min.css", getWaterCss());
@@ -92,6 +94,7 @@ export default function React() {
         contentImages,
         buttonLink,
         buttonText,
+        faq,
       }),
     ],
     { type: "text/html" }
@@ -449,22 +452,86 @@ export default function React() {
                                     />
                                   </div>
                                 </div>
-                                {/*<div className="space-y-1">*/}
-                                {/*  <label htmlFor="host" className="font-medium">*/}
-                                {/*    Table*/}
-                                {/*  </label>*/}
-                                {/*  <input*/}
-                                {/*    className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"*/}
-                                {/*    type="text"*/}
-                                {/*    id="domain_name"*/}
-                                {/*    name="domain_name"*/}
-                                {/*    onChange={(e) =>*/}
-                                {/*      setDomainName(e.target.value)*/}
-                                {/*    }*/}
-                                {/*    placeholder="example.com"*/}
-                                {/*    value={`${domainName}`}*/}
-                                {/*  />*/}
-                                {/*</div>*/}
+                                <div className="space-y-1">
+                                  <label htmlFor="host" className="font-medium">
+                                    FAQ
+                                  </label>
+                                  {faq.map((faq_item, index) => {
+                                    const question = faq_item[0];
+                                    const answer = faq_item[1];
+
+                                    return (
+                                      <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:space-x-2">
+                                        <input
+                                          className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                          disabled
+                                          value={question}
+                                        />
+                                        <input
+                                          className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                          disabled
+                                          value={answer}
+                                        />
+                                      </div>
+                                    );
+                                  })}
+                                  <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:space-x-2">
+                                    <input
+                                      className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                      type="text"
+                                      id="faq_question"
+                                      name="faq_question"
+                                      placeholder="Question"
+                                      onChange={(e) => {
+                                        // setFaq([
+                                        //   ...faq,
+                                        //   [e.target.value, "answer"],
+                                        // ]);
+                                      }}
+                                      // value={`${buttonText}`}
+                                    />
+                                    <input
+                                      className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                      type="text"
+                                      id="faq_answer"
+                                      name="faq_answer"
+                                      placeholder="Answer"
+                                      onChange={(e) => {
+                                        // setButtonLink(e.target.value);
+                                      }}
+                                      // value={`${buttonLink}`}
+                                    />
+                                    <div>
+                                      {/* Button (small) */}
+                                      <button
+                                        type="button"
+                                        className="inline-flex justify-center items-center space-x-2 border font-semibold rounded-lg px-3 py-2 leading-5 text-sm border-blue-700 bg-blue-700 text-white hover:text-white hover:bg-blue-600 hover:border-blue-600 focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:bg-blue-700 active:border-blue-700 dark:focus:ring-blue-400 dark:focus:ring-opacity-90"
+                                        onClick={(e) => {
+                                          const question =
+                                            document.getElementById(
+                                              "faq_question"
+                                            ).value;
+                                          const answer =
+                                            document.getElementById(
+                                              "faq_answer"
+                                            ).value;
+                                          setFaq([...faq, [question, answer]]);
+                                        }}
+                                      >
+                                        <svg
+                                          className="hi-mini hi-plus inline-block w-5 h-5"
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          viewBox="0 0 20 20"
+                                          fill="currentColor"
+                                          aria-hidden="true"
+                                        >
+                                          <path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z" />
+                                        </svg>
+                                      </button>
+                                      {/* END Button (small) */}
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
                             </div>
                             <div className="py-4 px-5 lg:px-6 w-full text-center bg-gray-50">
