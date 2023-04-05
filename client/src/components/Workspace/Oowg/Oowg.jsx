@@ -470,29 +470,25 @@ export default function React() {
                                     const answer = faq_item[1];
 
                                     return (
-                                      <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:space-x-2">
-                                        <label
-                                          htmlFor="name"
-                                          className="font-medium"
-                                        >
-                                          Q:
-                                        </label>
-                                        <input
-                                          className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-                                          disabled
-                                          value={question}
-                                        />
-                                        <label
-                                          htmlFor="name"
-                                          className="font-medium"
-                                        >
-                                          A:
-                                        </label>
-                                        <input
-                                          className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
-                                          disabled
-                                          value={answer}
-                                        />
+                                      <div className="flex flex-col rounded shadow-sm bg-white overflow-hidden">
+                                        {/* Card Header: Form Action multiple edits */}
+                                        {/*<div className="py-4 px-5 lg:px-6 w-full bg-gray-50">*/}
+                                        {/*  <h3>FAQ</h3>*/}
+                                        {/*</div>*/}
+
+                                        <div className="">
+                                          {/* Form 1 */}
+                                          <span className="p-4 rounded bg-gray-100 flex items-center justify-between space-x-2">
+                                            <div>
+                                              <h4 className="font-semibold mb-1">
+                                                {index}. {question}
+                                              </h4>
+                                              <p className="text-gray-600 text-sm">
+                                                {answer}
+                                              </p>
+                                            </div>
+                                          </span>
+                                        </div>
                                       </div>
                                     );
                                   })}
