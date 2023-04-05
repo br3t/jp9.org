@@ -1,4 +1,4 @@
-const head = (title, description, domainName) => {
+const head = (title, description, domainName, faq) => {
   return `<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,6 +34,27 @@ const head = (title, description, domainName) => {
     }]
     }
     </script>
+    ${
+      faq.length > 0
+        ? `<script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [${faq.map((faqItem) => {
+        return `{
+        "@type": "Question",
+        "name": "${faqItem[0]}",
+      "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "${faqItem[1]}"
+    }
+    }`;
+      })}]
+    }
+  </script>`
+        : ""
+    }
+    
 </head>`;
 };
 
