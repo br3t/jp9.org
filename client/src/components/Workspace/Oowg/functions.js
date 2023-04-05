@@ -79,10 +79,11 @@ const generateHtmlTemplate = ({
   buttonText,
   buttonLink,
   faq,
+  amp,
 }) => {
   return `<!DOCTYPE html>
 <html lang="${language}">
-${head(title, description, domainName, faq)}
+${head(title, description, domainName, faq, amp)}
 <body>
 <article>
     ${formatContent(

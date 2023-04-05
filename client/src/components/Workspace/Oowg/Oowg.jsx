@@ -10,6 +10,7 @@ import {
   getTranslate,
 } from "./functions.js";
 import ImageUploading from "react-images-uploading";
+import getAmp from "./amp.js";
 
 export default function React() {
   const [language, setLanguage] = useState(getDemoData().language);
@@ -24,6 +25,7 @@ export default function React() {
   );
   const [buttonLink, setButtonLink] = useState("#");
   const [faq, setFaq] = useState(getTranslate(language, "demoFaq"));
+  const [amp, setAmp] = useState(true);
 
   useEffect(() => {
     setHtmlContent(getDemoData(language).htmlContent);
@@ -35,6 +37,8 @@ export default function React() {
     setHtmlContent(getDemoData(language).htmlContent);
     setButtonText(getTranslate(language, "play_button_text"));
   }, [faq]);
+
+  // useEffect(() => {}, [amp]);
 
   const [contentImages, setContentImages] = useState(getDemoData().demoImages);
   const maxNumber = 69;
@@ -59,8 +63,25 @@ export default function React() {
         buttonLink,
         buttonText,
         faq,
+        amp,
       })
     );
+    if (amp) {
+      zip.file(
+        "amp.html",
+        getAmp(
+          language,
+          domainName,
+          title,
+          description,
+          htmlContent,
+          buttonLink,
+          buttonText,
+          faq
+        )
+      );
+    }
+
     zip.file("assets/styles/water.min.css", getWaterCss());
     zip.file("assets/styles/style.css", getCustomStyles());
     const contentImg = zip.folder("assets/images/content");
@@ -105,6 +126,7 @@ export default function React() {
         buttonLink,
         buttonText,
         faq,
+        amp,
       }),
     ],
     { type: "text/html" }
@@ -423,9 +445,13 @@ export default function React() {
                                         </span>
                                       </label>
                                       <input
-                                        type="checkbox disabled"
+                                        type="checkbox"
+                                        defaultChecked={amp}
                                         id="switch1"
                                         name="switch1"
+                                        onClick={() => {
+                                          setAmp(!amp);
+                                        }}
                                         className="form-switch transition-all duration-150 ease-out rounded-full h-7 w-12 text-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
                                       />
                                     </div>

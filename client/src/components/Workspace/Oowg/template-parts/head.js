@@ -1,4 +1,4 @@
-const head = (title, description, domainName, faq) => {
+const head = (title, description, domainName, faq, amp) => {
   return `<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,6 +10,7 @@ const head = (title, description, domainName, faq) => {
         : '<meta name="description" content="' + description + '" />'
     }
     <link rel="canonical" href="https://${domainName}/" />
+    ${amp && `<link rel="amphtml" href="https://${domainName}/amp.html">`}
     <meta name="generator" content="OOWG"/>
     <script type = "application/ld+json">
     {
