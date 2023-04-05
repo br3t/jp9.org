@@ -5,7 +5,9 @@ const formatContent = (
   isDemo,
   contentImages,
   language,
-  domainName
+  domainName,
+  buttonText,
+  buttonLink
 ) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
@@ -28,7 +30,9 @@ const formatContent = (
   button.setAttribute("type", "button");
   button.setAttribute("id", "copy-button");
   button.setAttribute("class", "blob");
-  button.innerHTML = getTranslate(language, "play_button_text");
+  button.setAttribute("onclick", `window.open('${buttonLink}','_blank');`);
+  button.setAttribute("href", buttonLink);
+  button.innerHTML = buttonText;
 
   //// table of contents
   // <ol>

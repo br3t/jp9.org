@@ -7,6 +7,7 @@ import {
   getWaterCss,
   getCustomStyles,
   getDemoData,
+  getTranslate,
 } from "./functions.js";
 import ImageUploading from "react-images-uploading";
 
@@ -18,6 +19,10 @@ export default function React() {
   const [htmlContent, setHtmlContent] = useState(
     getDemoData(language).htmlContent
   );
+  const [buttonText, setButtonText] = useState(
+    getTranslate(language, "play_button_text")
+  );
+  const [buttonLink, setButtonLink] = useState("#");
 
   useEffect(() => {
     setHtmlContent(getDemoData(language).htmlContent);
@@ -43,6 +48,8 @@ export default function React() {
         description,
         htmlContent,
         contentImages,
+        buttonLink,
+        buttonText,
       })
     );
     zip.file("assets/styles/water.min.css", getWaterCss());
@@ -83,6 +90,8 @@ export default function React() {
         htmlContent,
         isDemo: true,
         contentImages,
+        buttonLink,
+        buttonText,
       }),
     ],
     { type: "text/html" }
@@ -171,6 +180,12 @@ export default function React() {
                                     placeholder="en"
                                     onChange={(e) => {
                                       setLanguage(e.target.value);
+                                      setButtonText(
+                                        getTranslate(
+                                          language,
+                                          "play_button_text"
+                                        )
+                                      );
                                     }}
                                     value={`${language}`}
                                   />
@@ -398,6 +413,58 @@ export default function React() {
                                 </div>
 
                                 {/* END Form Switches: With Labels and Description */}
+                              </div>
+                            </div>
+                            <div className="py-4 px-5 lg:px-6 w-full text-center bg-gray-50">
+                              <strong>Content elements:</strong> Button
+                            </div>
+                            <div className="p-5 lg:p-6 grow w-full">
+                              <div className="sm:p-5 lg:px-10 lg:py-9 space-y-6">
+                                <div className="space-y-1">
+                                  <label htmlFor="name" className="font-medium">
+                                    Button
+                                  </label>
+                                  <div className="space-y-3 sm:space-y-0 sm:flex sm:items-center sm:space-x-2">
+                                    <input
+                                      className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                      type="text"
+                                      id="button_text"
+                                      name="button_text"
+                                      placeholder="Button Text"
+                                      onChange={(e) => {
+                                        setButtonText(e.target.value);
+                                      }}
+                                      value={`${buttonText}`}
+                                    />
+                                    <input
+                                      className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                      type="text"
+                                      id="button_link"
+                                      name="button_link"
+                                      placeholder="Button Link"
+                                      onChange={(e) => {
+                                        setButtonLink(e.target.value);
+                                      }}
+                                      value={`${buttonLink}`}
+                                    />
+                                  </div>
+                                </div>
+                                <div className="space-y-1">
+                                  <label htmlFor="host" className="font-medium">
+                                    Domain Name
+                                  </label>
+                                  <input
+                                    className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                    type="text"
+                                    id="domain_name"
+                                    name="domain_name"
+                                    onChange={(e) =>
+                                      setDomainName(e.target.value)
+                                    }
+                                    placeholder="example.com"
+                                    value={`${domainName}`}
+                                  />
+                                </div>
                               </div>
                             </div>
                             <div className="py-4 px-5 lg:px-6 w-full text-center bg-gray-50">
