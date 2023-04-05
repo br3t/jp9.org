@@ -456,7 +456,7 @@ export default function React() {
                                   <label htmlFor="host" className="font-medium">
                                     FAQ
                                   </label>
-                                  {faq.map((faq_item, index) => {
+                                  {faq.reverse().map((faq_item, index) => {
                                     const question = faq_item[0];
                                     const answer = faq_item[1];
 
