@@ -82,7 +82,7 @@ const generateHtmlTemplate = ({
 ${head(title, description, domainName)}
 <body>
 <article>
-    ${formatContent(htmlContent, isDemo, contentImages, language)}
+    ${formatContent(htmlContent, isDemo, contentImages, language, domainName)}
     <!-- custom article ul, ol, tables -->
     <!-- custom <b> in sentences with keyword -->
     <!-- pluses and minuses -->
