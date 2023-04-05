@@ -10,7 +10,7 @@ const head = (title, description, domainName) => {
         : '<meta name="description" content="' + description + '" />'
     }
     <link rel="canonical" href="https://${domainName}/" />
-    <meta name="generator" content="OOWG 0.1"/>
+    <meta name="generator" content="OOWG"/>
 </head>`;
 };
 
