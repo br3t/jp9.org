@@ -23,11 +23,12 @@ export default function React() {
     getTranslate(language, "play_button_text")
   );
   const [buttonLink, setButtonLink] = useState("#");
-  const [faq, setFaq] = useState([]);
+  const [faq, setFaq] = useState(getTranslate(language, "demoFaq"));
 
   useEffect(() => {
     setHtmlContent(getDemoData(language).htmlContent);
     setButtonText(getTranslate(language, "play_button_text"));
+    setFaq(getTranslate(language, "demoFaq"));
   }, [language]);
 
   useEffect(() => {
