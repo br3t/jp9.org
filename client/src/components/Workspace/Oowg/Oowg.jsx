@@ -388,7 +388,7 @@ export default function React() {
                                         </span>
                                       </label>
                                       <input
-                                        type="checkbox"
+                                        type="checkbox disabled"
                                         id="switch1"
                                         name="switch1"
                                         className="form-switch transition-all duration-150 ease-out rounded-full h-7 w-12 text-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
