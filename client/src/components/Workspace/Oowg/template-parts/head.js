@@ -10,7 +10,11 @@ const head = (title, description, domainName, faq, amp) => {
         : '<meta name="description" content="' + description + '" />'
     }
     <link rel="canonical" href="https://${domainName}/" />
-    ${amp && `<link rel="amphtml" href="https://${domainName}/amp.html">`}
+    ${
+      amp === true
+        ? `<link rel="amphtml" href="https://${domainName}/amp.html">`
+        : ""
+    }
     <meta name="generator" content="OOWG"/>
     <script type = "application/ld+json">
     {
