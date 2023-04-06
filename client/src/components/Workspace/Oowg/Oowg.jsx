@@ -77,7 +77,8 @@ export default function React() {
           htmlContent,
           buttonLink,
           buttonText,
-          faq
+          faq,
+          contentImages
         )
       );
     }
