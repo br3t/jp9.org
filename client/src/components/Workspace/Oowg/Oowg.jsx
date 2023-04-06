@@ -26,6 +26,11 @@ export default function Oowg() {
   const [buttonLink, setButtonLink] = useState("#");
   const [faq, setFaq] = useState(getTranslate(language, "demoFaq"));
   const [amp, setAmp] = useState(true);
+  const [chatGPTApiKey, setChatGPTApiKey] = useState("");
+  const [chatGPTQuestion, setChatGPTQuestion] = useState(
+    "The following is a conversation with an AI assistant. The assistant is helpful, creative, clever, and very friendly.\n\nHuman: Hello, who are you?\nAI: I am an AI created by OpenAI. How can I help you today?\nHuman: I'd like to cancel my subscription.\nAI:"
+  );
+  const [chatGPTAnswer, setChatGPTAnswer] = useState("");
 
   useEffect(() => {
     setHtmlContent(getDemoData(language).htmlContent);
@@ -604,6 +609,120 @@ export default function Oowg() {
                                       {/* END Button (small) */}
                                     </div>
                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="py-4 px-5 lg:px-6 w-full text-center bg-gray-50">
+                              <strong>Ai Features:</strong> ChatGPT
+                            </div>
+                            <div className="p-5 lg:p-6 grow w-full">
+                              <div className="sm:p-5 lg:px-10 lg:py-9 space-y-6">
+                                <div className="space-y-1">
+                                  <label htmlFor="name" className="font-medium">
+                                    ChatGPT API Key
+                                  </label>
+                                  <input
+                                    className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                    type="text"
+                                    id="chatgpt_api_key1"
+                                    name="chatgpt_api_key1"
+                                    placeholder="ChatGPT Api Key"
+                                    onChange={(e) => {
+                                      setChatGPTApiKey(e.target.value);
+                                    }}
+                                  />
+                                  <label htmlFor="name" className="font-medium">
+                                    Question
+                                  </label>
+                                  <div className="sm:flex">
+                                    <input
+                                      className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                      type="text"
+                                      id="chatgpt_question"
+                                      name="chatgpt_question"
+                                      placeholder="ChatGPT Question"
+                                      onChange={(e) => {
+                                        setChatGPTQuestion(e.target.value);
+                                      }}
+                                      value={chatGPTQuestion}
+                                    />
+                                    <button
+                                      type="button"
+                                      className="ml-5 inline-flex justify-center items-center space-x-2 border font-semibold rounded-lg px-3 py-2 leading-5 text-sm border-blue-700 bg-blue-700 text-white hover:text-white hover:bg-blue-600 hover:border-blue-600 focus:ring focus:ring-blue-400 focus:ring-opacity-50 active:bg-blue-700 active:border-blue-700 dark:focus:ring-blue-400 dark:focus:ring-opacity-90"
+                                      onClick={() => {
+                                        fetch(
+                                          `https://api.openai.com/v1/completions`,
+                                          {
+                                            body: JSON.stringify({
+                                              model: "text-davinci-003",
+                                              prompt: `${chatGPTQuestion}`,
+                                              temperature: 0.9,
+                                              max_tokens: 150,
+                                              top_p: 1,
+                                              frequency_penalty: 0.0,
+                                              presence_penalty: 0.6,
+                                              stop: [" Human:", " AI:"],
+                                            }),
+                                            method: "POST",
+                                            headers: {
+                                              "content-type":
+                                                "application/json",
+                                              Authorization: `Bearer  ${chatGPTApiKey}`,
+                                            },
+                                          }
+                                        ).then((response) => {
+                                          if (response.ok) {
+                                            response.json().then((json) => {
+                                              // console.log(json);
+                                              setChatGPTAnswer(
+                                                json.choices[0].text
+                                              );
+                                            });
+                                          } else {
+                                            response.json().then((json) => {
+                                              // console.log(json);
+                                              setChatGPTAnswer(
+                                                json.error.message
+                                              );
+                                            });
+                                          }
+                                        });
+                                      }}
+                                    >
+                                      <svg
+                                        className="hi-mini hi-question-mark-circle inline-block w-5 h-5"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                      >
+                                        <path
+                                          fillRule="evenodd"
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.061-1.061 3 3 0 112.871 5.026v.345a.75.75 0 01-1.5 0v-.5c0-.72.57-1.172 1.081-1.287A1.5 1.5 0 108.94 6.94zM10 15a1 1 0 100-2 1 1 0 000 2z"
+                                          clipRule="evenodd"
+                                        />
+                                      </svg>
+                                    </button>
+                                  </div>
+                                  {chatGPTAnswer && (
+                                    <>
+                                      <label
+                                        htmlFor="name"
+                                        className="font-medium"
+                                      >
+                                        Answer
+                                      </label>
+                                      <textarea
+                                        className="w-full block border border-gray-200 rounded px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                                        id="details"
+                                        name="details"
+                                        rows="4"
+                                        placeholder="Enter further details"
+                                        value={chatGPTAnswer}
+                                        disabled
+                                      ></textarea>
+                                    </>
+                                  )}
                                 </div>
                               </div>
                             </div>
