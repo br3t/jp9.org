@@ -304,7 +304,6 @@ export default function React() {
                                   <textarea
                                     className="block border border-gray-200 rounded px-5 py-3 leading-6 w-full focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 h-96"
                                     rows="5"
-                                    name="description"
                                     id="html_content"
                                     name="html_content"
                                     placeholder="HTML content (seo text)"
