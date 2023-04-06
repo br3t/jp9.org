@@ -34,8 +34,8 @@ export default function React() {
   }, [language]);
 
   useEffect(() => {
-    setHtmlContent(getDemoData(language).htmlContent);
-    setButtonText(getTranslate(language, "play_button_text"));
+    // setHtmlContent(getDemoData(language).htmlContent);
+    // setButtonText(getTranslate(language, "play_button_text"));
   }, [faq]);
 
   // useEffect(() => {}, [amp]);
