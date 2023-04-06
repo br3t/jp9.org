@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
 import JSZip from "jszip";
 import { saveAs } from "file-saver";
-import HTMLString from "react-html-string";
+import { getDemoData, getTranslate } from "./functions.js";
+
 import {
   generateHtmlTemplate,
   getWaterCss,
   getCustomStyles,
-  getDemoData,
-  getTranslate,
-} from "./functions.js";
-import ImageUploading from "react-images-uploading";
-import getAmp from "./amp.js";
+} from "./layouts/default/layout.js";
 
-export default function React() {
+import ImageUploading from "react-images-uploading";
+import getAmp from "./layouts/amp/amp.js";
+
+export default function Oowg() {
   const [language, setLanguage] = useState(getDemoData().language);
   const [domainName, setDomainName] = useState(getDemoData().domainName);
   const [title, setTitle] = useState(getDemoData().title);

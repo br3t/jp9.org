@@ -1,15 +1,14 @@
-import { getTranslate } from "./functions.js";
+import { getTranslate } from "../../functions.js";
 
 const formatContent = (
+  htmlContent,
+  isDemo,
+  contentImages,
   language,
   domainName,
-  title,
-  description,
-  htmlContent,
-  buttonLink,
   buttonText,
-  faq,
-  contentImages
+  buttonLink,
+  faq
 ) => {
   const parser = new DOMParser();
   const document = parser.parseFromString(htmlContent, "text/html");
@@ -17,17 +16,22 @@ const formatContent = (
   //// banner
   // <img src="/assets/images/banner.jpg" style="border-radius: 10px" alt="/assets/images/banner.jpg"/>
   const banner = document.createElement("img");
-  banner.setAttribute("src", "/assets/images/content/banner.jpg");
+  banner.setAttribute(
+    "src",
+    isDemo
+      ? window.location.origin + "/oowg/assets/images/banner.jpg"
+      : "/assets/images/content/banner.jpg"
+  );
   banner.setAttribute("alt", "banner");
-  banner.setAttribute("style", "border-radius: 10px; width: 100%");
+  banner.setAttribute("style", "border-radius: 10px");
 
   //// button
   // <button type="button" id="copy-button" class="blob">🔥🔥 Play 🔥🔥</button>
-  const button = document.createElement("a");
-  // button.setAttribute("type", "button");
-  // button.setAttribute("id", "copy-button");
-  button.setAttribute("class", "txt-button grn-button");
-  // button.setAttribute("onclick", `window.open('${buttonLink}','_blank');`);
+  const button = document.createElement("button");
+  button.setAttribute("type", "button");
+  button.setAttribute("id", "copy-button");
+  button.setAttribute("class", "blob");
+  button.setAttribute("onclick", `window.open('${buttonLink}','_blank');`);
   button.setAttribute("href", buttonLink);
   button.innerHTML = buttonText;
 
@@ -122,7 +126,6 @@ const formatContent = (
   const createImage = (src) => {
     const image = document.createElement("img");
     image.setAttribute("src", src);
-    image.setAttribute("style", "width: 100%");
     image.setAttribute(
       "alt",
       src.split("/assets/images/content/")[1]
@@ -235,11 +238,15 @@ const formatContent = (
           if (i % pictureEveryNParagraphs === 0 && imagesLength > 0) {
             const image = imagesStack.pop();
             if (image) {
-              document
-                .getElementsByTagName("p")
-                [i].after(
-                  createImage("/assets/images/content/" + image.file.name)
-                );
+              isDemo
+                ? document
+                    .getElementsByTagName("p")
+                    [i].after(createImage(image.data_url))
+                : document
+                    .getElementsByTagName("p")
+                    [i].after(
+                      createImage("/assets/images/content/" + image.file.name)
+                    );
             }
           }
         }
@@ -274,7 +281,6 @@ const formatContent = (
   }
 
   // console.log(document.body.innerHTML);
-
   // return htmlContent
   return document.body.innerHTML;
 };
